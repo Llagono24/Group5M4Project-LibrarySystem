@@ -7,9 +7,12 @@ import java.util.List;
 
 import com.group5.constants.Constants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LibraryImpl implements LibraryService {
-
+	
+	private static final Logger logger =  LoggerFactory.getLogger(LibraryImpl.class);
 
 	private static final int initialbookcnt = 5;
 
@@ -102,9 +105,11 @@ public class LibraryImpl implements LibraryService {
 
 	@Override
 	public int displayAllBorrowedBooks() {
-		// TODO Auto-generated method stub
+		// Added Logger Info - Jimboy Llagono
+		
     	System.out.println(Constants.strDISPLAY_BORROWED_BOOKS );
-
+    	logger.info(Constants.strDISPLAY_BORROWED_BOOKS);
+    	
 		//print table header
 		displayTableHeader(DISPLAY_BORROWED_BOOKS);
 
@@ -112,6 +117,7 @@ public class LibraryImpl implements LibraryService {
 		int rowCount = displayTableDetails(DISPLAY_BORROWED_BOOKS);
 		if (rowCount <= 0) {
 			System.out.println(Constants.strNORECORDFOUND );
+	    	logger.info(Constants.strNORECORDFOUND);
 		}
 
 		//print table footer
@@ -241,10 +247,20 @@ public class LibraryImpl implements LibraryService {
 
 	@Override
 	public Library addBook(Book newBook) {
+		
+
+			
 		bookList.add(newBook);
 		library.setBookList(bookList);
 		System.out.println("You have successfully added book with title " + newBook.getTitle());
+		
+		//Added logger info Jimboy Llagono 01.16.2026
+		logger.info("You have successfully added book with title {}",newBook.getTitle());
+
+		
 		return this.library;
+		
+
 	}
 
 

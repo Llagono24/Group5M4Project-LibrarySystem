@@ -278,6 +278,7 @@ public class LibraryImpl implements LibraryService {
 						//System.out.println(loan.getBook().getId());
 						//remove from loans
 						loanList.remove(i);
+						logger.info("Successfully removed in the loan list of the book id {}", bookfordeletion);
 						break;
 					}
 				}

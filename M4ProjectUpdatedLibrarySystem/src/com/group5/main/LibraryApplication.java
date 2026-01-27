@@ -162,6 +162,7 @@ public class LibraryApplication {
 	            	//[5] Return Book
 	            	displayLibraryMenu();
 	            	System.out.println(Constants.strDISPLAY_SELECTED_OPTION5);
+	            	logger.info("User {} selected option [5] Return Book", user.getName());
 	            	rowCount = libraryService.displayAllLoans();
 	            	if (rowCount > 0) {
 		            	String loanChoice = askLoanIdForReturn(input);
@@ -290,6 +291,7 @@ public class LibraryApplication {
     			
         		if (tempInput.equalsIgnoreCase("X")) {
 	        		bookFound = true;
+	        		System.out.println("Going back to main menu.");
 	        		logger.info("User {}, selected X in Book ID choice. Going back to main menu.", user.getName());
 	        		break;
 
@@ -369,19 +371,24 @@ public class LibraryApplication {
     	
     	do {
     		tempInput = validateInput(input, prompt);
+    		logger.info("User {}, search for Loan ID: {}.", user.getName(), tempInput);
     		if (tempInput != null) {
         		if (tempInput.equalsIgnoreCase("X")) {
 	        		loanSearch = true;
+	        		System.out.println("Going back to main menu.");
+	        		logger.warn("User {} selected x. Going back to main menu.", user.getName());
 	        		break;
 	        	} else {
 	        		loanSearch = libraryService.findLoan(tempInput);
 	        		
 	        		if (!loanSearch) {
 	        			System.out.print (Constants.strINVALID_LOAN_ID);
+	        			logger.warn("Loan ID: {} not found", tempInput);
 	        			loanSearch = false;
 	        		} else {
 	        			//valid loan ID
 	        			ret = tempInput;
+	        			logger.info("Loan ID: {} Found.",tempInput);
 		        		loanSearch = true;
 		        		break;
 	        		}
